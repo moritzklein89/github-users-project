@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserSearchComponent } from './user-search/user-search.component';
 import { UsersSpotlightComponent } from './users-spotlight.component';
 
@@ -11,6 +12,10 @@ const routes: Routes = [
       {
         path: 'search',
         component: UserSearchComponent
+      },
+      {
+        path: 'details',
+        component: UserDetailsComponent
       }
     ]
   }

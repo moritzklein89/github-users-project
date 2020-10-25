@@ -12,7 +12,7 @@ import { of } from 'rxjs';
 export class UserQueryResultsEffects {
 
   @Effect()
-  loadLocation$ = this.actions$
+  loadUserQueryInput$ = this.actions$
     .pipe(
       ofType<LoadUserQueryInput>(UserQueryInputActionTypes.LoadUserQueryInput),
       mergeMap((action) => this.userQueryService.getUsers(action.payload.userQueryInputData)

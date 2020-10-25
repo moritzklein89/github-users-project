@@ -27,7 +27,11 @@
         </thead>
         <tbody>
             <tr *ngFor="let user of queryResults.items | slice:0:10;">
-                <td class="name">{{user.login}}</td>
+                <td class="name">
+                    <a [routerLink]="[ '/users-spotlight/details']" [queryParams]="{username: user.login}">
+                        {{user.login}}
+                    </a>
+                </td>
             </tr>
         </tbody>
     </table>

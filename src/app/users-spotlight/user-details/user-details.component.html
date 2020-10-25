@@ -1,0 +1,11 @@
+
+<div class="d-flex pt-3" *ngIf="user$ | async as user">
+    <div class="card mx-auto">
+        <img class="card-img-top uniform-image-size" src="{{user.avatar_url}}" alt="User Avatar">
+        <div class="card-body">
+        <h5 class="card-title text-center">{{user.login}}</h5>
+        </div>
+    </div>
+</div>
+
+
