@@ -3,17 +3,23 @@ import { CommonModule } from '@angular/common';
 import { UsersSpotlightRoutingModule } from './users-spotlight-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { usersSpotlightReducers, metaReducers } from './reducers/index';
+import { reducers, metaReducers } from './reducers/index';
 import { UserQueryResultsEffects } from './effects/user-query-results.effects';
 import { UserSearchComponent } from './user-search/user-search.component';
+import { UsersSpotlightComponent } from './users-spotlight.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  declarations: [UserSearchComponent],
+  declarations: [UserSearchComponent, UsersSpotlightComponent],
   imports: [
     CommonModule,
-    StoreModule.forFeature('users-spotlight', usersSpotlightReducers, { metaReducers }),
+    StoreModule.forFeature('users-spotlight', reducers, { metaReducers }),
     EffectsModule.forFeature([UserQueryResultsEffects]),
-    UsersSpotlightRoutingModule
+    UsersSpotlightRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbAlertModule
   ]
 })
 export class UsersSpotlightModule { }

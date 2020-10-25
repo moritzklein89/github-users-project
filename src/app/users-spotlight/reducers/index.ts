@@ -1,4 +1,4 @@
-import { ActionReducerMap, MetaReducer } from '@ngrx/store';
+import { ActionReducerMap, createFeatureSelector, createSelector, MetaReducer } from '@ngrx/store';
 import { environment } from '../../../environments/environment';
 import { UserQueryResults } from '../models/user/user-query-results';
 import { UserQueryInputActionTypes, UserQueryInputAction } from '../actions/user-query-input.actions';
@@ -64,13 +64,21 @@ export function userQueryInputReducer(
   }
 }
 
-export const usersSpotlightReducers: ActionReducerMap<AppState> = {
+export const reducers: ActionReducerMap<AppState> = {
   userQueryResults: userQueryResultsReducer,
   userQueryInput: userQueryInputReducer
 };
 
-export const selectUserQueryResults = (state: AppState) => state.userQueryResults.userQueryResultsData;
+export const selectUsersSpotlight = createFeatureSelector<AppState>('users-spotlight');
 
-export const selectError = (state: AppState) => state.userQueryInput.error;
+export const selectQueryError = createSelector(
+  selectUsersSpotlight,
+  (state: AppState) => state.userQueryInput.error
+);
+
+export const selectUserQueryResults = createSelector(
+  selectUsersSpotlight,
+  (state: AppState) => state.userQueryResults.userQueryResultsData
+);
 
 export const metaReducers: MetaReducer<AppState>[] = !environment.production ? [] : [];
