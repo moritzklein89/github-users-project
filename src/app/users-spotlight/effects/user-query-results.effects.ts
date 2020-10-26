@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { LoadUserQueryResults } from '../actions/user-query-results.actions';
+import { of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { UsersSpotlightState } from '../reducers';
-import { Store } from '@ngrx/store';
 import { UserQueryService } from '../services/user-query.service';
+import { LoadUserQueryResults } from '../actions/user-query-results.actions';
 import { UserQueryInputActionTypes, UserQueryInputError, LoadUserQueryInput } from '../actions/user-query-input.actions';
-import { of } from 'rxjs';
 
 @Injectable()
 export class UserQueryResultsEffects {

@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 import { LoadUserQueryInput } from '../actions/user-query-input.actions';
 import { LoadUserQueryResults } from '../actions/user-query-results.actions';
 import { UserQueryResults } from '../models/user/user-query-results';
-import { UsersSpotlightState, selectQueryError, selectUserQueryResults } from '../reducers';
+import { UsersSpotlightState } from '../reducers';
+import { selectQueryError, selectUserQueryResults } from '../selectors/user.selectors';
 
 @Component({
   selector: 'app-user-search',

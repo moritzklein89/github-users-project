@@ -1,4 +1,4 @@
-<div class="col-8 offset-2">
+<div class="col-sm-12 col-md-8 offset-md-2">
     <div *ngIf="queryError$ | async as error">
         <ngb-alert [dismissible]="false">
             <strong>Error!</strong> {{ error.statusText }}
@@ -15,14 +15,14 @@
     </form>
 </div>
 
-<div class="col-8 offset-2" *ngIf="queryResults$ | async as queryResults">
+<div class="col-sm-12 col-md-8 offset-md-2" *ngIf="queryResults$ | async as queryResults">
     <div class="card mb-5">
         <div class="card-header">
           Users <small class="blockquote-footer">Found <strong>{{queryResults.total_count}}</strong> in total</small>
         </div>
         <ul class="list-group list-group-flush">
             <li *ngFor="let user of queryResults.items | slice:0:10;" class="list-group-item">
-                <a [routerLink]="[ '/users-spotlight/profile']" [queryParams]="{username: user.login}">
+                <a [routerLink]="[ '/profile']" [queryParams]="{username: user.login}">
                     {{user.login}}
                 </a>
             </li>

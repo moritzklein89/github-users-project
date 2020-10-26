@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'users-spotlight',
+    path: '',
     loadChildren: () => import('./users-spotlight/users-spotlight.module').then(m => m.UsersSpotlightModule)
   }
 ];

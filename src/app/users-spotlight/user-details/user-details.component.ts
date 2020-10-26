@@ -4,7 +4,8 @@ import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { LoadUserQueryInput } from '../actions/user-query-input.actions';
 import { User } from '../models/user/user';
-import { UsersSpotlightState, selectUser } from '../reducers';
+import { UsersSpotlightState } from '../reducers';
+import { selectUser } from '../selectors/user.selectors';
 
 @Component({
   selector: 'app-user-details',

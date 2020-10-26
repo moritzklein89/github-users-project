@@ -1,25 +1,51 @@
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { Observable } from 'rxjs';
+import { provideMockStore } from '@ngrx/store/testing';
+import { Action } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
 
+import * as queryInputActions from '../actions/user-query-input.actions';
+import * as queryResultsActions from '../actions/user-query-results.actions';
 import { UserQueryResultsEffects } from './user-query-results.effects';
+import { UserQueryService } from '../services/user-query.service';
+import { UserQueryResults } from '../models/user/user-query-results';
 
 describe('UserQueryResultsEffects', () => {
-  let actions$: Observable<any>;
+  let actions$: Observable<Action>;
   let effects: UserQueryResultsEffects;
+  let userQueryService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         UserQueryResultsEffects,
-        provideMockActions(() => actions$)
+        provideMockStore(),
+        provideMockActions(() => actions$),
+        {
+          provide: UserQueryService,
+          useValue: jasmine.createSpyObj('UserQueryService', ['getUsers'])
+        }
       ]
     });
 
     effects = TestBed.inject(UserQueryResultsEffects);
+    userQueryService = TestBed.inject(UserQueryService);
   });
 
-  it('should be created', () => {
-    expect(effects).toBeTruthy();
+  it('should dispatch LoadUserQueryResults action when LoadUserQueryInput action is dispatched', () => {
+    const exampleQueryResult: UserQueryResults = {
+      total_count: 0,
+      incomplete_results: false,
+      items: []
+    };
+
+    userQueryService.getUsers.and.returnValue(of(exampleQueryResult));
+
+    actions$ = of({ type: queryInputActions.UserQueryInputActionTypes.LoadUserQueryInput });
+
+    effects.loadUserQueryInput$.subscribe(action => {
+      expect(action.type).toBe(queryResultsActions.UserQueryResultsActionTypes.LoadUserQueryResults);
+      expect(action.payload).toEqual({userQueryResultsData: exampleQueryResult});
+    });
   });
 });
