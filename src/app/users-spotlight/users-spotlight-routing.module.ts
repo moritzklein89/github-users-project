@@ -10,11 +10,11 @@ const routes: Routes = [
     component: UsersSpotlightComponent,
     children: [
       {
-        path: 'search',
+        path: '',
         component: UserSearchComponent
       },
       {
-        path: 'details',
+        path: 'profile',
         component: UserDetailsComponent
       }
     ]
