@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { LoadUserQueryInput } from '../actions/user-query-input.actions';
 import { LoadUserQueryResults } from '../actions/user-query-results.actions';
 import { UserQueryResults } from '../models/user/user-query-results';
-import { AppState, selectQueryError, selectUserQueryResults } from '../reducers';
+import { UsersSpotlightState, selectQueryError, selectUserQueryResults } from '../reducers';
 
 @Component({
   selector: 'app-user-search',
@@ -17,15 +17,15 @@ export class UserSearchComponent implements OnInit {
   queryError$: Observable<string>;
   queryResults$: Observable<UserQueryResults>;
 
-  constructor(private formBuilder: FormBuilder, private store: Store<AppState>) { }
+  constructor(private formBuilder: FormBuilder, private store: Store<UsersSpotlightState>) { }
 
   ngOnInit() {
     this.userSearchForm = this.formBuilder.group({
       userName: ''
     });
-
     this.queryResults$ = this.store.pipe(select(selectUserQueryResults));
     this.queryError$ = this.store.pipe(select(selectQueryError));
+    this.store.dispatch(new LoadUserQueryResults({userQueryResultsData: null}));
   }
 
   onSubmit(userName: string) {

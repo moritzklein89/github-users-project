@@ -23,7 +23,7 @@ const initialUserQueryInputState: UserQueryInputState = {
   error: null
 };
 
-export interface AppState {
+export interface UsersSpotlightState {
   userQueryResults: UserQueryResultsState;
   userQueryInput: UserQueryInputState;
 }
@@ -65,26 +65,26 @@ export function userQueryInputReducer(
   }
 }
 
-export const reducers: ActionReducerMap<AppState> = {
+export const reducers: ActionReducerMap<UsersSpotlightState> = {
   userQueryResults: userQueryResultsReducer,
   userQueryInput: userQueryInputReducer
 };
 
-export const selectUsersSpotlight = createFeatureSelector<AppState>('users-spotlight');
+export const selectUsersSpotlight = createFeatureSelector<UsersSpotlightState>('users-spotlight');
 
 export const selectQueryError = createSelector(
   selectUsersSpotlight,
-  (state: AppState) => state.userQueryInput.error
+  (state: UsersSpotlightState) => state.userQueryInput.error
 );
 
 export const selectUserQueryResults = createSelector(
   selectUsersSpotlight,
-  (state: AppState) => state.userQueryResults.userQueryResultsData
+  (state: UsersSpotlightState) => state.userQueryResults.userQueryResultsData
 );
 
 export const selectUser = createSelector(
   selectUsersSpotlight,
-  (state: AppState, username: string) => {
+  (state: UsersSpotlightState, username: string) => {
     let foundUser: User = null;
     if (state.userQueryResults.userQueryResultsData) {
       foundUser = state.userQueryResults.userQueryResultsData.items.find(user => user.login === username);
@@ -93,4 +93,4 @@ export const selectUser = createSelector(
   }
 );
 
-export const metaReducers: MetaReducer<AppState>[] = !environment.production ? [] : [];
+export const metaReducers: MetaReducer<UsersSpotlightState>[] = !environment.production ? [] : [];

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { LoadUserQueryResults } from '../actions/user-query-results.actions';
 import { map, mergeMap, catchError } from 'rxjs/operators';
-import { AppState } from '../reducers';
+import { UsersSpotlightState } from '../reducers';
 import { Store } from '@ngrx/store';
 import { UserQueryService } from '../services/user-query.service';
 import { UserQueryInputActionTypes, UserQueryInputError, LoadUserQueryInput } from '../actions/user-query-input.actions';
@@ -24,6 +24,6 @@ export class UserQueryResultsEffects {
       ))
   );
 
-  constructor(private actions$: Actions, private store: Store<AppState>, private userQueryService: UserQueryService) { }
+  constructor(private actions$: Actions, private store: Store<UsersSpotlightState>, private userQueryService: UserQueryService) { }
 
 }

@@ -5,6 +5,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { reducers, metaReducers } from './reducers/index';
 import { UserQueryResultsEffects } from './effects/user-query-results.effects';
@@ -21,7 +22,8 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     UsersSpotlightRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbAlertModule
+    NgbAlertModule,
+    FontAwesomeModule
   ]
 })
 export class UsersSpotlightModule { }
