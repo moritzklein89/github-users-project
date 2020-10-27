@@ -10,6 +10,7 @@ import { map, mergeMap } from 'rxjs/operators';
 })
 export class UserQueryService {
   private githubApiUrl = 'https://api.github.com/search/users';
+  private followersWithFollowersLimit = 10;
 
   constructor(private http: HttpClient) { }
 
@@ -27,7 +28,7 @@ export class UserQueryService {
 
     return this.http.get<User[]>(followersUrl).pipe(
       mergeMap(followers => {
-        followers.slice(0, 10).forEach(follower => {
+        followers.slice(0, this.followersWithFollowersLimit).forEach(follower => {
           followersWithFollowersObservables.push(
             this.getFollowers(follower.followers_url).pipe(
               map(subFollowers => {
