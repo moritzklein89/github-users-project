@@ -4,6 +4,8 @@ import { UserQueryResults } from '../models/user/user-query-results';
 import { UserQueryInputActionTypes, UserQueryInputAction } from '../actions/user-query-input.actions';
 import { UserQueryResultsActionTypes, UserQueryResultsAction} from '../actions/user-query-results.actions';
 import { User, UserWithFollowers } from '../models/user/user';
+import { SelectedUserAction, SelectedUserActionTypes } from '../actions/selected-user.actions';
+import { SelectedUserFollowersAction, SelectedUserFollowersActionTypes } from '../actions/selected-user-followers.actions';
 
 export interface UserQueryResultsState {
   userQueryResultsData: UserQueryResults| null;
@@ -33,17 +35,19 @@ const initialSelectedUserState: SelectedUserState = {
   error: null
 };
 
-export interface UserFollowerDataState {
-  followerData: UserWithFollowers[]| null;
+export interface SelectedUserFollowersState {
+  selectedUserFollowersData: UserWithFollowers[]| null;
 }
 
-const initialUserFollowerDataState: UserFollowerDataState = {
-  followerData: null
+const initialSelectedUserFollowersState: SelectedUserFollowersState = {
+  selectedUserFollowersData: null
 };
 
 export interface UsersSpotlightState {
-  userQueryResults: UserQueryResultsState;
   userQueryInput: UserQueryInputState;
+  userQueryResults: UserQueryResultsState;
+  selectedUser: SelectedUserState;
+  selectedUserFollowers: SelectedUserFollowersState;
 }
 
 export function userQueryResultsReducer(
@@ -54,6 +58,43 @@ export function userQueryResultsReducer(
     case UserQueryResultsActionTypes.LoadUserQueryResults:
       return {
         userQueryResultsData: action.payload.userQueryResultsData
+      };
+
+    default:
+      return state;
+  }
+}
+
+export function selectedUserFollowersReducer(
+  state: SelectedUserFollowersState = initialSelectedUserFollowersState,
+  action: SelectedUserFollowersAction
+  ): SelectedUserFollowersState {
+  switch (action.type) {
+    case SelectedUserFollowersActionTypes.LoadSelectedUserFollowers:
+      return {
+        selectedUserFollowersData: action.payload.selectedUserFollowersData
+      };
+
+    default:
+      return state;
+  }
+}
+
+export function selectedUserReducer(
+  state: SelectedUserState = initialSelectedUserState,
+  action: SelectedUserAction
+  ): SelectedUserState {
+  switch (action.type) {
+    case SelectedUserActionTypes.LoadSelectedUser:
+      return {
+        selectedUserData: action.payload.selectedUserData,
+        error: null
+      };
+
+    case SelectedUserActionTypes.SelectedUserError:
+      return {
+        selectedUserData: null,
+        error: action.payload.error
       };
 
     default:
@@ -85,7 +126,9 @@ export function userQueryInputReducer(
 
 export const reducers: ActionReducerMap<UsersSpotlightState> = {
   userQueryResults: userQueryResultsReducer,
-  userQueryInput: userQueryInputReducer
+  userQueryInput: userQueryInputReducer,
+  selectedUser: selectedUserReducer,
+  selectedUserFollowers: selectedUserFollowersReducer
 };
 
 export const metaReducers: MetaReducer<UsersSpotlightState>[] = !environment.production ? [] : [];

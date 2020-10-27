@@ -21,5 +21,5 @@ export interface User {
 }
 
 export interface UserWithFollowers extends User {
-    followers: User[];
+    followers?: User[];
 }

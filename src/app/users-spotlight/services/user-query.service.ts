@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { forkJoin, Observable, of } from 'rxjs';
 import { UserQueryResults } from '../models/user/user-query-results';
-import { User } from '../models/user/user';
+import { User, UserWithFollowers } from '../models/user/user';
+import { map, mergeMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,27 @@ export class UserQueryService {
 
   getFollowers(followersUrl: string): Observable<User[]> {
     return this.http.get<User[]>(followersUrl);
+  }
+
+  getFollowersWithFollowers(followersUrl: string): Observable<UserWithFollowers[]> {
+    const followersWithFollowersObservables: Array<Observable<UserWithFollowers>> = [];
+    let followerWithFollowers: UserWithFollowers;
+
+    return this.http.get<User[]>(followersUrl).pipe(
+      mergeMap(followers => {
+        followers.slice(0, 10).forEach(follower => {
+          followersWithFollowersObservables.push(
+            this.getFollowers(follower.followers_url).pipe(
+              map(subFollowers => {
+                followerWithFollowers = follower;
+                followerWithFollowers.followers = subFollowers;
+                return followerWithFollowers;
+              })
+            )
+          );
+        });
+        return forkJoin(followersWithFollowersObservables);
+      })
+    );
   }
 }

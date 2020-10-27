@@ -1,11 +1,40 @@
 
-<div class="d-flex pt-3" *ngIf="user$ | async as user">
-    <div class="card mx-auto">
-        <img class="card-img-top uniform-image-size" src="{{user.avatar_url}}" alt="User Avatar">
-        <div class="card-body">
-        <h5 class="card-title text-center">{{user.login}}</h5>
+<div class="col-12" *ngIf="user$ | async as user">
+    <div class="row">
+        <div class="col-12 col-sm-6">
+            <div class="card">
+                <img class="card-img-top uniform-image-size" src="{{user.avatar_url}}" alt="User Avatar">
+                <div class="card-body">
+                <h5 class="card-title text-center">{{user.login}}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    Followers <small class="blockquote-footer">and their follower counts</small>
+                </div>
+                <div class="card-body">
+                    <ngx-charts-bar-vertical
+                    [view]="barChartConfig.view"
+                    [scheme]="barChartConfig.colorScheme"
+                    [results]="barChartConfig.results"
+                    [gradient]="barChartConfig.gradient"
+                    [xAxis]="barChartConfig.showXAxis"
+                    [yAxis]="barChartConfig.showYAxis"
+                    [legend]="barChartConfig.showLegend"
+                    [showXAxisLabel]="barChartConfig.showXAxisLabel"
+                    [showYAxisLabel]="barChartConfig.showYAxisLabel"
+                    [xAxisLabel]="barChartConfig.xAxisLabel"
+                    [yAxisLabel]="barChartConfig.yAxisLabel">
+                    </ngx-charts-bar-vertical>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+
+
 
 
