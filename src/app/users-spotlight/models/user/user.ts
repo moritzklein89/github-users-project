@@ -19,3 +19,7 @@ export interface User {
     site_admin: boolean;
     score: number;
 }
+
+export interface UserWithFollowers extends User {
+    followers: User[];
+}

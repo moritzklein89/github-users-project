@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment';
 import { UserQueryResults } from '../models/user/user-query-results';
 import { UserQueryInputActionTypes, UserQueryInputAction } from '../actions/user-query-input.actions';
 import { UserQueryResultsActionTypes, UserQueryResultsAction} from '../actions/user-query-results.actions';
+import { User, UserWithFollowers } from '../models/user/user';
 
 export interface UserQueryResultsState {
   userQueryResultsData: UserQueryResults| null;
@@ -20,6 +21,24 @@ export interface UserQueryInputState {
 const initialUserQueryInputState: UserQueryInputState = {
   userQueryInputData: null,
   error: null
+};
+
+export interface SelectedUserState {
+  selectedUserData: User| null;
+  error: string| null;
+}
+
+const initialSelectedUserState: SelectedUserState = {
+  selectedUserData: null,
+  error: null
+};
+
+export interface UserFollowerDataState {
+  followerData: UserWithFollowers[]| null;
+}
+
+const initialUserFollowerDataState: UserFollowerDataState = {
+  followerData: null
 };
 
 export interface UsersSpotlightState {
