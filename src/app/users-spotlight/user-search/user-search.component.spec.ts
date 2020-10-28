@@ -11,7 +11,7 @@ import { selectQueryError, selectUserQueryResults } from '../selectors/user.sele
 import { LoadUserQueryResults } from '../actions/user-query-results.actions';
 import { LoadUserQueryInput } from '../actions/user-query-input.actions';
 
-fdescribe('UserSearchComponent', () => {
+describe('UserSearchComponent', () => {
   let component: UserSearchComponent;
   let fixture: ComponentFixture<UserSearchComponent>;
   let mockStore: MockStore;

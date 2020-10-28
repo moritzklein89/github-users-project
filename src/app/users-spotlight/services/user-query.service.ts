@@ -23,6 +23,7 @@ export class UserQueryService {
   }
 
   getFollowersWithFollowers(followersUrl: string): Observable<UserWithFollowers[]> {
+    console.log('called getFollowers..');
     const followersWithFollowersObservables: Array<Observable<UserWithFollowers>> = [];
     let followerWithFollowers: UserWithFollowers;
 

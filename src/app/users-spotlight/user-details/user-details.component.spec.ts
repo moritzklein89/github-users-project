@@ -1,12 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
 
 import { UserDetailsComponent } from './user-details.component';
 // TODO fix/add tests
-describe('UserDetailsComponent', () => {
+fdescribe('UserDetailsComponent', () => {
   let component: UserDetailsComponent;
   let fixture: ComponentFixture<UserDetailsComponent>;
+  let mockRoute;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
+    mockRoute = jasmine.createSpyObj('ActivatedRoute', []);
     TestBed.configureTestingModule({
       declarations: [ UserDetailsComponent ]
     })

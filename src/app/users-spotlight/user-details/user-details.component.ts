@@ -21,7 +21,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   public followers$: Observable<UserWithFollowers[]>;
   public followersError$: Observable<string>;
   public barChartConfig: BarChartConfig = {
-    showXAxis: false,
+    showXAxis: true,
     showYAxis: true,
     gradient: false,
     showLegend: false,
@@ -52,8 +52,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     this.userDataSubscription = this.user$.subscribe(userData => {
       if (userData === null) {
         this.store.dispatch(new LoadUserQueryInput({userQueryInputData: userName}));
-      }
-      if (userData) {
+      } else if (userData) {
         this.store.dispatch(new LoadSelectedUser({selectedUserData: userData}));
       }
     });
