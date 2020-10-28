@@ -6,7 +6,7 @@ import { UserQueryResultsActionTypes, UserQueryResultsAction} from '../actions/u
 import { User, UserWithFollowers } from '../models/user/user';
 import { SelectedUserAction, SelectedUserActionTypes } from '../actions/selected-user.actions';
 import { SelectedUserFollowersAction, SelectedUserFollowersActionTypes } from '../actions/selected-user-followers.actions';
-
+// TODO split this up (?)
 export interface UserQueryResultsState {
   userQueryResultsData: UserQueryResults| null;
 }

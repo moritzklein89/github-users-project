@@ -3,12 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { Observable, Subscription } from 'rxjs';
+import { LoadSelectedUserFollowers } from '../actions/selected-user-followers.actions';
 import { LoadSelectedUser } from '../actions/selected-user.actions';
 import { LoadUserQueryInput } from '../actions/user-query-input.actions';
 import { BarChartConfig, BarChartData } from '../models/user/bar-chart';
 import { User, UserWithFollowers } from '../models/user/user';
 import { UsersSpotlightState } from '../reducers';
-import { selectFollowersData, selectUser } from '../selectors/user.selectors';
+import { selectFollowersData, selectFollowersError, selectUser } from '../selectors/user.selectors';
 
 @Component({
   selector: 'app-user-details',
@@ -18,8 +19,9 @@ import { selectFollowersData, selectUser } from '../selectors/user.selectors';
 export class UserDetailsComponent implements OnInit, OnDestroy {
   public user$: Observable<User>;
   public followers$: Observable<UserWithFollowers[]>;
+  public followersError$: Observable<string>;
   public barChartConfig: BarChartConfig = {
-    showXAxis: true,
+    showXAxis: false,
     showYAxis: true,
     gradient: false,
     showLegend: false,
@@ -27,7 +29,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     xAxisLabel: '',
     showYAxisLabel: false,
     yAxisLabel: '',
-    colorScheme: {domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']},
+    colorScheme: {domain: ['#007bff']},
     view: null
   };
   private userDataSubscription: Subscription;
@@ -36,9 +38,11 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, private store: Store<UsersSpotlightState>) { }
 
   ngOnInit() {
+    this.store.dispatch(new LoadSelectedUserFollowers({selectedUserFollowersData: null}));
     this.route.queryParams.subscribe(params => {
       this.user$ = this.store.pipe(select(selectUser, params.username));
       this.followers$ = this.store.pipe(select(selectFollowersData));
+      this.followersError$ = this.store.pipe(select(selectFollowersError));
       this.setupUserDataSubscription(params.username);
       this.setupFollowersDataSubscription();
     });

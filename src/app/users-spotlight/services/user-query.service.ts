@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { forkJoin, Observable, of } from 'rxjs';
+import { EMPTY, forkJoin, Observable, of } from 'rxjs';
 import { UserQueryResults } from '../models/user/user-query-results';
 import { User, UserWithFollowers } from '../models/user/user';
 import { map, mergeMap } from 'rxjs/operators';
@@ -39,6 +39,9 @@ export class UserQueryService {
             )
           );
         });
+        if (followersWithFollowersObservables.length === 0) {
+          followersWithFollowersObservables.push(EMPTY);
+        }
         return forkJoin(followersWithFollowersObservables);
       })
     );

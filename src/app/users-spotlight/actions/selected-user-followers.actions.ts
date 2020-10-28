@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { UserWithFollowers } from '../models/user/user';
-
+// TODO add tests
 export enum SelectedUserFollowersActionTypes {
   LoadSelectedUserFollowers = '[SelectedUserFollowers] Load SelectedUserFollowers'
 }

@@ -13,13 +13,14 @@ import { UserQueryResultsEffects } from './effects/user-query-results.effects';
 import { UsersSpotlightComponent } from './users-spotlight.component';
 import { UserSearchComponent } from './user-search/user-search.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { SelectedUserFollowersEffects } from './effects/selected-user-followers.effects';
 
 @NgModule({
   declarations: [UserSearchComponent, UsersSpotlightComponent, UserDetailsComponent],
   imports: [
     CommonModule,
     StoreModule.forFeature('users-spotlight', reducers, { metaReducers }),
-    EffectsModule.forFeature([UserQueryResultsEffects]),
+    EffectsModule.forFeature([UserQueryResultsEffects, SelectedUserFollowersEffects]),
     UsersSpotlightRoutingModule,
     FormsModule,
     ReactiveFormsModule,

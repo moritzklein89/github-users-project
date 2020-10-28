@@ -7,8 +7,6 @@ import { UsersSpotlightState } from '../reducers';
 import { UserQueryService } from '../services/user-query.service';
 import { LoadUserQueryResults } from '../actions/user-query-results.actions';
 import { UserQueryInputActionTypes, UserQueryInputError, LoadUserQueryInput } from '../actions/user-query-input.actions';
-import { LoadSelectedUser, SelectedUserActionTypes, SelectedUserError } from '../actions/selected-user.actions';
-import { LoadSelectedUserFollowers } from '../actions/selected-user-followers.actions';
 
 @Injectable()
 export class UserQueryResultsEffects {
@@ -24,19 +22,6 @@ export class UserQueryResultsEffects {
         }),
         catchError((errorMessage) => of(new UserQueryInputError({error: errorMessage})))
       ))
-  );
-
-  @Effect()
-  loadSelectedUser$ = this.actions$
-  .pipe(
-    ofType<LoadSelectedUser>(SelectedUserActionTypes.LoadSelectedUser),
-    mergeMap((action) => this.userQueryService.getFollowersWithFollowers(action.payload.selectedUserData.followers_url)
-    .pipe(
-      map(followersWithFollowers => {
-        return (new LoadSelectedUserFollowers({selectedUserFollowersData: followersWithFollowers}));
-      }),
-      catchError((errorMessage) => of(new SelectedUserError({error: errorMessage})))
-    ))
   );
 
   constructor(private actions$: Actions, private store: Store<UsersSpotlightState>, private userQueryService: UserQueryService) { }

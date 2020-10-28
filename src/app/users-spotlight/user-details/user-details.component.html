@@ -1,35 +1,38 @@
 
-<div class="container-fluid">
-    <div class="col-12" *ngIf="user$ | async as user">
-        <div class="row">
-            <div class="col-12 col-sm-6">
-                <div class="card h-100">
-                    <img class="card-img-top uniform-image-size" src="{{user.avatar_url}}" alt="User Avatar">
-                    <div class="card-body">
-                    <h5 class="card-title text-center">{{user.login}}</h5>
-                    </div>
+<div class="col-12" *ngIf="user$ | async as user">
+    <div class="row">
+        <div class="col-12 mb-3 col-sm-6 mb-sm-0">
+            <div class="card h-100">
+                <img class="card-img-top uniform-image-size" src="{{user.avatar_url}}" alt="User Avatar">
+                <div class="card-body">
+                <h5 class="card-title text-center">{{user.login}}</h5>
                 </div>
             </div>
-            <div class="col-12 col-sm-6">
-                <div class="card bar-chart-capped-height h-100">
-                    <div class="card-header">
-                        Followers <small class="blockquote-footer">and their follower counts</small>
-                    </div>
-                    <div class="card-body">
-                        <ngx-charts-bar-vertical
-                        [view]="barChartConfig.view"
-                        [scheme]="barChartConfig.colorScheme"
-                        [results]="barChartConfig.results"
-                        [gradient]="barChartConfig.gradient"
-                        [xAxis]="barChartConfig.showXAxis"
-                        [yAxis]="barChartConfig.showYAxis"
-                        [legend]="barChartConfig.showLegend"
-                        [showXAxisLabel]="barChartConfig.showXAxisLabel"
-                        [showYAxisLabel]="barChartConfig.showYAxisLabel"
-                        [xAxisLabel]="barChartConfig.xAxisLabel"
-                        [yAxisLabel]="barChartConfig.yAxisLabel">
-                        </ngx-charts-bar-vertical>
-                    </div>
+        </div>
+        <div class="col-12 col-sm-6">
+            <div *ngIf="followersError$ | async as error">
+                <ngb-alert [dismissible]="false">
+                    <strong>Error!</strong> {{ error.statusText }}
+                </ngb-alert>
+            </div>
+            <div class="card bar-chart-capped-height h-100">
+                <div class="card-header">
+                    Followers <small class="blockquote-footer">and their follower counts</small>
+                </div>
+                <div class="card-body">
+                    <ngx-charts-bar-vertical
+                    [view]="barChartConfig.view"
+                    [scheme]="barChartConfig.colorScheme"
+                    [results]="barChartConfig.results"
+                    [gradient]="barChartConfig.gradient"
+                    [xAxis]="barChartConfig.showXAxis"
+                    [yAxis]="barChartConfig.showYAxis"
+                    [legend]="barChartConfig.showLegend"
+                    [showXAxisLabel]="barChartConfig.showXAxisLabel"
+                    [showYAxisLabel]="barChartConfig.showYAxisLabel"
+                    [xAxisLabel]="barChartConfig.xAxisLabel"
+                    [yAxisLabel]="barChartConfig.yAxisLabel">
+                    </ngx-charts-bar-vertical>
                 </div>
             </div>
         </div>

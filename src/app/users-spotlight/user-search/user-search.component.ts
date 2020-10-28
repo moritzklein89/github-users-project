@@ -14,9 +14,9 @@ import { selectQueryError, selectUserQueryResults } from '../selectors/user.sele
   styleUrls: ['./user-search.component.css']
 })
 export class UserSearchComponent implements OnInit {
-  userSearchForm: FormGroup;
-  queryError$: Observable<string>;
-  queryResults$: Observable<UserQueryResults>;
+  public userSearchForm: FormGroup;
+  public queryError$: Observable<string>;
+  public queryResults$: Observable<UserQueryResults>;
 
   constructor(private formBuilder: FormBuilder, private store: Store<UsersSpotlightState>) { }
 
