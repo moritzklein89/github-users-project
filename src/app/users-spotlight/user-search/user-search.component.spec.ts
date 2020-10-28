@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { UserSearchComponent } from './user-search.component';
 import { MemoizedSelector } from '@ngrx/store';
@@ -10,17 +11,24 @@ import { selectQueryError, selectUserQueryResults } from '../selectors/user.sele
 import { LoadUserQueryResults } from '../actions/user-query-results.actions';
 import { LoadUserQueryInput } from '../actions/user-query-input.actions';
 
-describe('UserSearchComponent', () => {
+fdescribe('UserSearchComponent', () => {
   let component: UserSearchComponent;
   let fixture: ComponentFixture<UserSearchComponent>;
   let mockStore: MockStore;
   let mockQueryResultsSelector: MemoizedSelector<UsersSpotlightState, UserQueryResults>;
   let mockQueryErrorSelector: MemoizedSelector<UsersSpotlightState, string>;
 
+  const exampleQueryResults = {
+    total_count: 0,
+    incomplete_results: false,
+    items: []
+  };
+  const exampleError = 'test-error';
+
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ UserSearchComponent ],
-      imports: [ FormsModule, ReactiveFormsModule ],
+      imports: [ FormsModule, ReactiveFormsModule, NgbAlertModule ],
       providers: [
         provideMockStore(),
       ]
@@ -30,17 +38,8 @@ describe('UserSearchComponent', () => {
     mockStore = TestBed.inject(MockStore);
     spyOn(mockStore, 'dispatch');
 
-    mockQueryResultsSelector = mockStore.overrideSelector(
-      selectUserQueryResults, {
-        total_count: 0,
-        incomplete_results: false,
-        items: []
-      }
-    );
-    mockQueryErrorSelector = mockStore.overrideSelector(
-      selectQueryError,
-      null
-    );
+    mockQueryResultsSelector = mockStore.overrideSelector(selectUserQueryResults, exampleQueryResults);
+    mockQueryErrorSelector = mockStore.overrideSelector(selectQueryError, exampleError);
   }));
 
   beforeEach(() => {
@@ -57,6 +56,15 @@ describe('UserSearchComponent', () => {
     expect(component.queryResults$).toBeDefined();
     expect(component.queryError$).toBeDefined();
     expect(mockStore.dispatch).toHaveBeenCalledWith(new LoadUserQueryResults({userQueryResultsData: null}));
+  });
+
+  it('should receive query results and errors', () => {
+    component.queryResults$.subscribe(queryResults => {
+      expect(queryResults).toEqual(exampleQueryResults);
+    });
+    component.queryError$.subscribe(queryError => {
+      expect(queryError).toEqual(exampleError);
+    });
   });
 
   it('should clear the query results, then execute a new query', () => {
