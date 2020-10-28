@@ -32,8 +32,8 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     colorScheme: {domain: ['#007bff']},
     view: null
   };
-  private userDataSubscription: Subscription;
-  private followersDataSubscription: Subscription;
+  public userDataSubscription: Subscription;
+  public followersDataSubscription: Subscription;
 
   constructor(private route: ActivatedRoute, private store: Store<UsersSpotlightState>) { }
 
@@ -74,8 +74,12 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.userDataSubscription.unsubscribe();
-    this.followersDataSubscription.unsubscribe();
+    if (this.userDataSubscription) {
+      this.userDataSubscription.unsubscribe();
+    }
+    if (this.followersDataSubscription) {
+      this.followersDataSubscription.unsubscribe();
+    }
   }
 
 }

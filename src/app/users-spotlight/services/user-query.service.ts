@@ -23,7 +23,6 @@ export class UserQueryService {
   }
 
   getFollowersWithFollowers(followersUrl: string): Observable<UserWithFollowers[]> {
-    console.log('called getFollowers..');
     const followersWithFollowersObservables: Array<Observable<UserWithFollowers>> = [];
     let followerWithFollowers: UserWithFollowers;
 
@@ -40,9 +39,6 @@ export class UserQueryService {
             )
           );
         });
-        if (followersWithFollowersObservables.length === 0) {
-          followersWithFollowersObservables.push(EMPTY);
-        }
         return forkJoin(followersWithFollowersObservables);
       })
     );
