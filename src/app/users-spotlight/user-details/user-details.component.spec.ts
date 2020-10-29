@@ -13,7 +13,7 @@ import { LoadSelectedUserFollowers } from '../actions/selected-user-followers.ac
 import { LoadSelectedUser } from '../actions/selected-user.actions';
 import { LoadUserQueryInput } from '../actions/user-query-input.actions';
 
-fdescribe('UserDetailsComponent', () => {
+describe('UserDetailsComponent', () => {
   let component: UserDetailsComponent;
   let fixture: ComponentFixture<UserDetailsComponent>;
   let mockStore;

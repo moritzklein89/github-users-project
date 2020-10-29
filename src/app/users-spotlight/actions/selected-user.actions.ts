@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { User } from '../models/user/user';
-// TODO add tests
+
 export enum SelectedUserActionTypes {
   LoadSelectedUser = '[SelectedUser] Load SelectedUser',
   SelectedUserError = '[SelectedUser] SelectedUser Error'
