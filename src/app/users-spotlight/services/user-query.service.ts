@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { EMPTY, forkJoin, Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { forkJoin, Observable } from 'rxjs';
 import { UserQueryResults } from '../models/user/user-query-results';
 import { User, UserWithFollowers } from '../models/user/user';
 import { map, mergeMap } from 'rxjs/operators';

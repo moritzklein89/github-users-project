@@ -1,12 +1,60 @@
 import { TestBed } from '@angular/core/testing';
-
+import { Type } from '@angular/core';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { UserQueryService } from './user-query.service';
-// TODO fix/add tests
+import { exampleQueryResults } from '../models/user/user-query-results';
+import { exampleFollowersData, exampleUser, exampleUser2 } from '../models/user/user';
+import { of } from 'rxjs';
+
 describe('UserQueryService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+  let service: UserQueryService;
+  let httpMock: HttpTestingController;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [ HttpClientTestingModule ],
+      providers: [
+        UserQueryService,
+      ]
+    });
+    service = TestBed.inject(UserQueryService);
+    httpMock = TestBed.inject(HttpTestingController as Type<HttpTestingController>);
+  });
 
   it('should be created', () => {
-    const service: UserQueryService = TestBed.inject(UserQueryService);
     expect(service).toBeTruthy();
   });
+
+  it('should retrieve queryResults given a query input', () => {
+    service.getUsers('example').subscribe(queryResults => {
+      expect(queryResults).toEqual(exampleQueryResults);
+    });
+
+    const request = httpMock.expectOne('https://api.github.com/search/users?q=example');
+    expect(request.request.method).toBe('GET');
+    request.flush(exampleQueryResults);
+  });
+
+  it('should retrieve a followers list given a followersUrl', () => {
+    service.getFollowers('https://api.github.com/users/example/followers').subscribe(followersData => {
+      expect(followersData).toEqual([exampleUser]);
+    });
+
+    const request = httpMock.expectOne('https://api.github.com/users/example/followers');
+    expect(request.request.method).toBe('GET');
+    request.flush([exampleUser]);
+  });
+
+  it('should retrieve/create a followersWithFollowers list given a followersUrl', () => {
+    spyOn(service, 'getFollowers').and.returnValue(of([exampleUser]));
+    service.getFollowersWithFollowers('https://api.github.com/users/test/followers')
+    .subscribe(followersWithFollowers => {
+      expect(followersWithFollowers).toEqual(exampleFollowersData);
+    });
+
+    const request = httpMock.expectOne('https://api.github.com/users/test/followers');
+    expect(request.request.method).toBe('GET');
+    request.flush([exampleUser2]);
+  });
+
 });

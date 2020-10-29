@@ -35,7 +35,12 @@ describe('UserQueryResultsEffects', () => {
   it('should dispatch LoadUserQueryResults action when LoadUserQueryInput action is dispatched', () => {
     userQueryService.getUsers.and.returnValue(of(exampleQueryResults));
 
-    actions$ = of({ type: queryInputActions.UserQueryInputActionTypes.LoadUserQueryInput });
+    actions$ = of({
+      type: queryInputActions.UserQueryInputActionTypes.LoadUserQueryInput,
+      payload: {
+        userQueryInputData: 'test'
+      }
+    });
 
     effects.loadUserQueryInput$.subscribe(action => {
       expect(action.type).toBe(queryResultsActions.UserQueryResultsActionTypes.LoadUserQueryResults);

@@ -11,7 +11,6 @@ import { LoadSelectedUserFollowers } from '../actions/selected-user-followers.ac
 @Injectable()
 export class SelectedUserFollowersEffects {
 
-  // TODO add tests and find out if service gets called repeatedly
   @Effect()
   loadSelectedUser$ = this.actions$
   .pipe(
@@ -19,7 +18,6 @@ export class SelectedUserFollowersEffects {
     mergeMap((action) => this.userQueryService.getFollowersWithFollowers(action.payload.selectedUserData.followers_url)
     .pipe(
       map(followersWithFollowers => {
-        console.log('fetched followers');
         return (new LoadSelectedUserFollowers({selectedUserFollowersData: followersWithFollowers}));
       }),
       catchError((errorMessage) => of(new SelectedUserError({error: errorMessage})))

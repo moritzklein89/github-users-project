@@ -11,7 +11,7 @@ import * as selectedUserActions from '../actions/selected-user.actions';
 import * as selectedUserFollowersActions from '../actions/selected-user-followers.actions';
 
 
-fdescribe('SelectedUserFollowersEffects', () => {
+describe('SelectedUserFollowersEffects', () => {
   let actions$: Observable<Action>;
   let effects: SelectedUserFollowersEffects;
   let userQueryService;
