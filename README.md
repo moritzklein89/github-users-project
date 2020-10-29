@@ -1,6 +1,6 @@
 # GithubUsersProject
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.3.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli).
 
 ## Development server
 
@@ -25,3 +25,7 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Github API rate limit
+
+Since the Github API has a custom rate limit, you can only retrieve so many users and their follower counts before the API will shut you out for a while. 
