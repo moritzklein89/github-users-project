@@ -43,7 +43,32 @@ fdescribe('UserDetailsComponent', () => {
     site_admin: false,
     score: 1.0
   };
-  const exampleFollowersData: UserWithFollowers[] = null;
+  const exampleFollowersData: UserWithFollowers[] = [
+    {
+      login: 'test',
+      id: 383316,
+      node_id: 'MDQ6VXNlcjM4MzMxNg==',
+      avatar_url: 'https://avatars3.githubusercontent.com/u/383316?v=4',
+      gravatar_id: '',
+      url: 'https://api.github.com/users/test',
+      html_url: 'https://github.com/test',
+      followers_url: 'https://api.github.com/users/test/followers',
+      following_url: 'https://api.github.com/users/test/following{/other_user}',
+      gists_url: 'https://api.github.com/users/test/gists{/gist_id}',
+      starred_url: 'https://api.github.com/users/test/starred{/owner}{/repo}',
+      subscriptions_url: 'https://api.github.com/users/test/subscriptions',
+      organizations_url: 'https://api.github.com/users/test/orgs',
+      repos_url: 'https://api.github.com/users/test/repos',
+      events_url: 'https://api.github.com/users/test/events{/privacy}',
+      received_events_url: 'https://api.github.com/users/test/received_events',
+      type: 'User',
+      site_admin: false,
+      score: 1.0,
+      followers: [
+        exampleUser
+      ]
+    }
+  ];
   const exampleError = 'test-error';
 
   beforeEach(waitForAsync(() => {
@@ -131,11 +156,14 @@ fdescribe('UserDetailsComponent', () => {
 
       expect(mockStore.dispatch).toHaveBeenCalledWith(new LoadSelectedUser({selectedUserData: exampleUser}));
     });
-    // TODO expand this test with example data
-    it('should listen for followersData and send it to the barChart', () => {
+
+    it('should listen for followersData, process and then inject it into the barChart', () => {
       component.setupFollowersDataSubscription();
 
-      expect(component.barChartConfig.results).toEqual([]);
+      expect(component.barChartConfig.results).toEqual([{
+        name: 'test',
+        value: 1
+      }]);
     });
   });
 
