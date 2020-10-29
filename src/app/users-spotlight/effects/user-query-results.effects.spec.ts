@@ -8,7 +8,7 @@ import * as queryInputActions from '../actions/user-query-input.actions';
 import * as queryResultsActions from '../actions/user-query-results.actions';
 import { UserQueryResultsEffects } from './user-query-results.effects';
 import { UserQueryService } from '../services/user-query.service';
-import { UserQueryResults } from '../models/user/user-query-results';
+import { exampleQueryResults } from '../models/user/user-query-results';
 
 describe('UserQueryResultsEffects', () => {
   let actions$: Observable<Action>;
@@ -33,19 +33,13 @@ describe('UserQueryResultsEffects', () => {
   });
 
   it('should dispatch LoadUserQueryResults action when LoadUserQueryInput action is dispatched', () => {
-    const exampleQueryResult: UserQueryResults = {
-      total_count: 0,
-      incomplete_results: false,
-      items: []
-    };
-
-    userQueryService.getUsers.and.returnValue(of(exampleQueryResult));
+    userQueryService.getUsers.and.returnValue(of(exampleQueryResults));
 
     actions$ = of({ type: queryInputActions.UserQueryInputActionTypes.LoadUserQueryInput });
 
     effects.loadUserQueryInput$.subscribe(action => {
       expect(action.type).toBe(queryResultsActions.UserQueryResultsActionTypes.LoadUserQueryResults);
-      expect(action.payload).toEqual({userQueryResultsData: exampleQueryResult});
+      expect(action.payload).toEqual({userQueryResultsData: exampleQueryResults});
     });
   });
 });

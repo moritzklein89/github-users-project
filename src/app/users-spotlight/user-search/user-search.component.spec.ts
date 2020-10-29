@@ -6,7 +6,7 @@ import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserSearchComponent } from './user-search.component';
 import { MemoizedSelector } from '@ngrx/store';
 import { UsersSpotlightState } from '../reducers';
-import { UserQueryResults } from '../models/user/user-query-results';
+import { UserQueryResults, exampleQueryResults } from '../models/user/user-query-results';
 import { selectQueryError, selectUserQueryResults } from '../selectors/user.selectors';
 import { LoadUserQueryResults } from '../actions/user-query-results.actions';
 import { LoadUserQueryInput } from '../actions/user-query-input.actions';
@@ -18,11 +18,6 @@ describe('UserSearchComponent', () => {
   let mockQueryResultsSelector: MemoizedSelector<UsersSpotlightState, UserQueryResults>;
   let mockQueryErrorSelector: MemoizedSelector<UsersSpotlightState, string>;
 
-  const exampleQueryResults = {
-    total_count: 0,
-    incomplete_results: false,
-    items: []
-  };
   const exampleError = 'test-error';
 
   beforeEach(waitForAsync(() => {

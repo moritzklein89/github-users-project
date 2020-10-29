@@ -5,3 +5,9 @@ export interface UserQueryResults {
     incomplete_results: boolean;
     items: User[];
 }
+
+export const exampleQueryResults = {
+    total_count: 0,
+    incomplete_results: false,
+    items: []
+  };
