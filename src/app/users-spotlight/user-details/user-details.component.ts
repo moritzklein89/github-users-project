@@ -6,7 +6,7 @@ import { Observable, Subscription } from 'rxjs';
 import { LoadSelectedUserFollowers } from '../actions/selected-user-followers.actions';
 import { LoadSelectedUser } from '../actions/selected-user.actions';
 import { LoadUserQueryInput } from '../actions/user-query-input.actions';
-import { BarChartConfig, BarChartData } from '../models/user/bar-chart';
+import { BarChartConfig, BarChartData } from '../models/bar-chart/bar-chart';
 import { User, UserWithFollowers } from '../models/user/user';
 import { UsersSpotlightState } from '../reducers';
 import { selectFollowersData, selectFollowersError, selectUser } from '../selectors/user.selectors';
