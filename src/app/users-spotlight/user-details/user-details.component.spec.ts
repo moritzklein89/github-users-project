@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { UserDetailsComponent } from './user-details.component';
-import { User, UserWithFollowers, exampleUser, exampleFollowersData } from '../models/user/user';
+import { User, FullUser, exampleUser, exampleFollowersData } from '../models/user/user';
 import { UsersSpotlightState } from '../reducers';
 import { MemoizedSelector, select } from '@ngrx/store';
 import { selectFollowersData, selectFollowersError, selectUser } from '../selectors/user.selectors';
@@ -18,7 +18,7 @@ describe('UserDetailsComponent', () => {
   let fixture: ComponentFixture<UserDetailsComponent>;
   let mockStore;
   let mockUserSelector: MemoizedSelector<UsersSpotlightState, User>;
-  let mockFollowersDataSelector: MemoizedSelector<UsersSpotlightState, UserWithFollowers[]>;
+  let mockFollowersDataSelector: MemoizedSelector<UsersSpotlightState, FullUser[]>;
   let mockFollowersErrorSelector: MemoizedSelector<UsersSpotlightState, string>;
 
   const mockQueryParamsObservable = of([{username: 'example'}]);
@@ -115,7 +115,7 @@ describe('UserDetailsComponent', () => {
 
       expect(component.barChartConfig.results).toEqual([{
         name: 'test',
-        value: 1
+        value: 24
       }]);
     });
   });

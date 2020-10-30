@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { UserWithFollowers } from '../models/user/user';
+import { FullUser } from '../models/user/user';
 
 export enum SelectedUserFollowersActionTypes {
   LoadSelectedUserFollowers = '[SelectedUserFollowers] Load SelectedUserFollowers'
@@ -8,14 +8,14 @@ export enum SelectedUserFollowersActionTypes {
 export class SelectedUserFollowersAction implements Action {
   type: string;
   payload: {
-    selectedUserFollowersData: UserWithFollowers[];
+    selectedUserFollowersData: FullUser[];
   };
 }
 
 export class LoadSelectedUserFollowers implements Action {
   readonly type = SelectedUserFollowersActionTypes.LoadSelectedUserFollowers;
 
-  constructor(readonly payload: {selectedUserFollowersData: UserWithFollowers[]}) {
+  constructor(readonly payload: {selectedUserFollowersData: FullUser[]}) {
 
   }
 }

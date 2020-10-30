@@ -7,7 +7,7 @@ import { LoadSelectedUserFollowers } from '../actions/selected-user-followers.ac
 import { LoadSelectedUser } from '../actions/selected-user.actions';
 import { LoadUserQueryInput } from '../actions/user-query-input.actions';
 import { BarChartConfig, BarChartData } from '../models/bar-chart/bar-chart';
-import { User, UserWithFollowers } from '../models/user/user';
+import { User, FullUser } from '../models/user/user';
 import { UsersSpotlightState } from '../reducers';
 import { selectFollowersData, selectFollowersError, selectUser } from '../selectors/user.selectors';
 
@@ -18,7 +18,7 @@ import { selectFollowersData, selectFollowersError, selectUser } from '../select
 })
 export class UserDetailsComponent implements OnInit, OnDestroy {
   public user$: Observable<User>;
-  public followers$: Observable<UserWithFollowers[]>;
+  public followers$: Observable<FullUser[]>;
   public followersError$: Observable<string>;
   public barChartConfig: BarChartConfig = {
     showXAxis: true,
@@ -65,7 +65,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
         followersData.forEach(follower => {
           barChartData.push({
             name: follower.login,
-            value: follower.followers.length
+            value: follower.followers
           });
         });
       }

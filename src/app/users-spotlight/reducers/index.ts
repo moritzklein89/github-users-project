@@ -3,7 +3,7 @@ import { environment } from '../../../environments/environment';
 import { UserQueryResults } from '../models/user/user-query-results';
 import { UserQueryInputActionTypes, UserQueryInputAction } from '../actions/user-query-input.actions';
 import { UserQueryResultsActionTypes, UserQueryResultsAction} from '../actions/user-query-results.actions';
-import { User, UserWithFollowers } from '../models/user/user';
+import { User, FullUser } from '../models/user/user';
 import { SelectedUserAction, SelectedUserActionTypes } from '../actions/selected-user.actions';
 import { SelectedUserFollowersAction, SelectedUserFollowersActionTypes } from '../actions/selected-user-followers.actions';
 
@@ -36,7 +36,7 @@ const initialSelectedUserState: SelectedUserState = {
 };
 
 export interface SelectedUserFollowersState {
-  selectedUserFollowersData: UserWithFollowers[]| null;
+  selectedUserFollowersData: FullUser[]| null;
 }
 
 const initialSelectedUserFollowersState: SelectedUserFollowersState = {
