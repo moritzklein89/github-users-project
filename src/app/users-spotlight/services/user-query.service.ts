@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { forkJoin, Observable } from 'rxjs';
 import { UserQueryResults } from '../models/user/user-query-results';
 import { FullUser, User } from '../models/user/user';
-import { map, mergeMap } from 'rxjs/operators';
+import { mergeMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class UserQueryService {
     return this.http.get<UserQueryResults>(this.githubApiSearchUrl + '?q=' + queryInput);
   }
 
-  getUser(userName: string): Observable<FullUser> {
+  getFullUser(userName: string): Observable<FullUser> {
     return this.http.get<FullUser>(this.githubApiUsersUrl + userName);
   }
 
@@ -34,7 +34,7 @@ export class UserQueryService {
       mergeMap(followers => {
         followers.slice(0, this.followersWithFollowersLimit).forEach(follower => {
           followersWithFollowersObservables.push(
-            this.getUser(follower.login)
+            this.getFullUser(follower.login)
           );
         });
         return forkJoin(followersWithFollowersObservables);

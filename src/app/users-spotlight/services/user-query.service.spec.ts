@@ -3,7 +3,7 @@ import { Type } from '@angular/core';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { UserQueryService } from './user-query.service';
 import { exampleQueryResults } from '../models/user/user-query-results';
-import { exampleFollowersData, exampleUser, exampleUser2 } from '../models/user/user';
+import { exampleFollowersData, exampleUser, exampleFullUser } from '../models/user/user';
 import { of } from 'rxjs';
 
 describe('UserQueryService', () => {
@@ -35,6 +35,16 @@ describe('UserQueryService', () => {
     request.flush(exampleQueryResults);
   });
 
+  it('should retrieve a full user given a username', () => {
+    service.getFullUser('test').subscribe(fullUser => {
+      expect(fullUser).toEqual(exampleFullUser);
+    });
+
+    const request = httpMock.expectOne('https://api.github.com/users/test');
+    expect(request.request.method).toBe('GET');
+    request.flush(exampleFullUser);
+  });
+
   it('should retrieve a followers list given a followersUrl', () => {
     service.getFollowers('https://api.github.com/users/example/followers').subscribe(followersData => {
       expect(followersData).toEqual([exampleUser]);
@@ -46,7 +56,7 @@ describe('UserQueryService', () => {
   });
 
   it('should retrieve/create a followersWithFollowers list given a followersUrl', () => {
-    spyOn(service, 'getFollowers').and.returnValue(of([exampleUser]));
+    spyOn(service, 'getFullUser').and.returnValue(of(exampleFullUser));
     service.getFollowersWithFollowers('https://api.github.com/users/test/followers')
     .subscribe(followersWithFollowers => {
       expect(followersWithFollowers).toEqual(exampleFollowersData);
@@ -54,7 +64,7 @@ describe('UserQueryService', () => {
 
     const request = httpMock.expectOne('https://api.github.com/users/test/followers');
     expect(request.request.method).toBe('GET');
-    request.flush([exampleUser2]);
+    request.flush([exampleUser]);
   });
 
 });
