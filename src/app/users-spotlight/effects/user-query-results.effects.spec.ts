@@ -43,6 +43,7 @@ describe('UserQueryResultsEffects', () => {
     });
 
     effects.loadUserQueryInput$.subscribe(action => {
+      expect(userQueryService.getUsers).toHaveBeenCalledWith('test');
       expect(action.type).toBe(queryResultsActions.UserQueryResultsActionTypes.LoadUserQueryResults);
       expect(action.payload).toEqual({userQueryResultsData: exampleQueryResults});
     });

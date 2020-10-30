@@ -46,6 +46,7 @@ describe('SelectedUserFollowersEffects', () => {
     });
 
     effects.loadSelectedUser$.subscribe(action => {
+      expect(userQueryService.getFollowersWithFollowers).toHaveBeenCalledWith('https://api.github.com/users/example/followers');
       expect(action.type).toBe(selectedUserFollowersActions.SelectedUserFollowersActionTypes.LoadSelectedUserFollowers);
       expect(action.payload).toEqual({selectedUserFollowersData: exampleFollowersData});
     });
