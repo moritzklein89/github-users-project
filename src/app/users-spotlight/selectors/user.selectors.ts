@@ -10,9 +10,9 @@ export const selectQueryError = createSelector(
 );
 
 export const selectFollowersError = createSelector(
-    selectUsersSpotlight,
-    (state: UsersSpotlightState) => state.selectedUser.error
-  );
+  selectUsersSpotlight,
+  (state: UsersSpotlightState) => state.selectedUser.error
+);
 
 export const selectUserQueryResults = createSelector(
   selectUsersSpotlight,
@@ -20,8 +20,8 @@ export const selectUserQueryResults = createSelector(
 );
 
 export const selectFollowersData = createSelector(
-    selectUsersSpotlight,
-    (state: UsersSpotlightState) => state.selectedUserFollowers.selectedUserFollowersData
+  selectUsersSpotlight,
+  (state: UsersSpotlightState) => state.selectedUserFollowers.selectedUserFollowersData
 );
 
 export const selectUser = createSelector(

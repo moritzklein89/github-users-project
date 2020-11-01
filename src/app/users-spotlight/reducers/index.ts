@@ -2,13 +2,13 @@ import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { environment } from '../../../environments/environment';
 import { UserQueryResults } from '../models/user/user-query-results';
 import { UserQueryInputActionTypes, UserQueryInputAction } from '../actions/user-query-input.actions';
-import { UserQueryResultsActionTypes, UserQueryResultsAction} from '../actions/user-query-results.actions';
+import { UserQueryResultsActionTypes, UserQueryResultsAction } from '../actions/user-query-results.actions';
 import { User, FullUser } from '../models/user/user';
 import { SelectedUserAction, SelectedUserActionTypes } from '../actions/selected-user.actions';
 import { SelectedUserFollowersAction, SelectedUserFollowersActionTypes } from '../actions/selected-user-followers.actions';
 
 export interface UserQueryResultsState {
-  userQueryResultsData: UserQueryResults| null;
+  userQueryResultsData: UserQueryResults | null;
 }
 
 const initialUserQueryResultsState: UserQueryResultsState = {
@@ -16,8 +16,8 @@ const initialUserQueryResultsState: UserQueryResultsState = {
 };
 
 export interface UserQueryInputState {
-  userQueryInputData: string| null;
-  error: string| null;
+  userQueryInputData: string | null;
+  error: string | null;
 }
 
 const initialUserQueryInputState: UserQueryInputState = {
@@ -26,8 +26,8 @@ const initialUserQueryInputState: UserQueryInputState = {
 };
 
 export interface SelectedUserState {
-  selectedUserData: User| null;
-  error: string| null;
+  selectedUserData: User | null;
+  error: string | null;
 }
 
 const initialSelectedUserState: SelectedUserState = {
@@ -36,7 +36,7 @@ const initialSelectedUserState: SelectedUserState = {
 };
 
 export interface SelectedUserFollowersState {
-  selectedUserFollowersData: FullUser[]| null;
+  selectedUserFollowersData: FullUser[] | null;
 }
 
 const initialSelectedUserFollowersState: SelectedUserFollowersState = {
@@ -53,7 +53,7 @@ export interface UsersSpotlightState {
 export function userQueryResultsReducer(
   state: UserQueryResultsState = initialUserQueryResultsState,
   action: UserQueryResultsAction
-  ): UserQueryResultsState {
+): UserQueryResultsState {
   switch (action.type) {
     case UserQueryResultsActionTypes.LoadUserQueryResults:
       return {
@@ -68,7 +68,7 @@ export function userQueryResultsReducer(
 export function selectedUserFollowersReducer(
   state: SelectedUserFollowersState = initialSelectedUserFollowersState,
   action: SelectedUserFollowersAction
-  ): SelectedUserFollowersState {
+): SelectedUserFollowersState {
   switch (action.type) {
     case SelectedUserFollowersActionTypes.LoadSelectedUserFollowers:
       return {
@@ -83,7 +83,7 @@ export function selectedUserFollowersReducer(
 export function selectedUserReducer(
   state: SelectedUserState = initialSelectedUserState,
   action: SelectedUserAction
-  ): SelectedUserState {
+): SelectedUserState {
   switch (action.type) {
     case SelectedUserActionTypes.LoadSelectedUser:
       return {
@@ -105,7 +105,7 @@ export function selectedUserReducer(
 export function userQueryInputReducer(
   state: UserQueryInputState = initialUserQueryInputState,
   action: UserQueryInputAction
-  ): UserQueryInputState {
+): UserQueryInputState {
   switch (action.type) {
     case UserQueryInputActionTypes.LoadUserQueryInput:
       return {

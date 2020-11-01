@@ -17,7 +17,7 @@ export class SelectedUserAction implements Action {
 export class LoadSelectedUser implements Action {
   readonly type = SelectedUserActionTypes.LoadSelectedUser;
 
-  constructor(readonly payload: {selectedUserData: User}) {
+  constructor(readonly payload: { selectedUserData: User }) {
 
   }
 }
@@ -25,7 +25,7 @@ export class LoadSelectedUser implements Action {
 export class SelectedUserError implements Action {
   readonly type = SelectedUserActionTypes.SelectedUserError;
 
-  constructor(readonly payload: {error: string}) {
+  constructor(readonly payload: { error: string }) {
 
   }
 }

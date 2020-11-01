@@ -16,13 +16,13 @@ export class UserQueryResultsEffects {
     .pipe(
       ofType<LoadUserQueryInput>(UserQueryInputActionTypes.LoadUserQueryInput),
       mergeMap((action) => this.userQueryService.getUsers(action.payload.userQueryInputData)
-      .pipe(
-        map(userQueryResults => {
-          return (new LoadUserQueryResults({userQueryResultsData: userQueryResults}));
-        }),
-        catchError((errorMessage) => of(new UserQueryInputError({error: errorMessage})))
-      ))
-  );
+        .pipe(
+          map(userQueryResults => {
+            return (new LoadUserQueryResults({ userQueryResultsData: userQueryResults }));
+          }),
+          catchError((errorMessage) => of(new UserQueryInputError({ error: errorMessage })))
+        ))
+    );
 
   constructor(private actions$: Actions, private store: Store<UsersSpotlightState>, private userQueryService: UserQueryService) { }
 

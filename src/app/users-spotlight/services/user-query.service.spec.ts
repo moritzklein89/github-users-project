@@ -5,7 +5,7 @@ import { UserQueryService } from './user-query.service';
 import { exampleQueryResults } from '../models/user/user-query-results';
 import { exampleFollowersData, exampleUser, exampleFullUser } from '../models/user/user';
 import { of } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 describe('UserQueryService', () => {
   let service: UserQueryService;
@@ -14,7 +14,7 @@ describe('UserQueryService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ HttpClientTestingModule ],
+      imports: [HttpClientTestingModule],
       providers: [
         UserQueryService,
       ]
@@ -60,9 +60,9 @@ describe('UserQueryService', () => {
   it('should retrieve/create a followersWithFollowers list given a followersUrl', () => {
     spyOn(service, 'getFullUser').and.returnValue(of(exampleFullUser));
     service.getFollowersWithFollowers(`${githubApiUrl}/users/test/followers`)
-    .subscribe(followersWithFollowers => {
-      expect(followersWithFollowers).toEqual(exampleFollowersData);
-    });
+      .subscribe(followersWithFollowers => {
+        expect(followersWithFollowers).toEqual(exampleFollowersData);
+      });
 
     const request = httpMock.expectOne(`${githubApiUrl}/users/test/followers`);
     expect(request.request.method).toBe('GET');

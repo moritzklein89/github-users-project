@@ -29,7 +29,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     xAxisLabel: '',
     showYAxisLabel: false,
     yAxisLabel: '',
-    colorScheme: {domain: ['#007bff']},
+    colorScheme: { domain: ['#007bff'] },
     view: null
   };
   public userDataSubscription: Subscription;
@@ -38,7 +38,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, private store: Store<UsersSpotlightState>) { }
 
   ngOnInit() {
-    this.store.dispatch(new LoadSelectedUserFollowers({selectedUserFollowersData: null}));
+    this.store.dispatch(new LoadSelectedUserFollowers({ selectedUserFollowersData: null }));
     this.route.queryParams.subscribe(params => {
       this.user$ = this.store.pipe(select(selectUser, params.username));
       this.followers$ = this.store.pipe(select(selectFollowersData));
@@ -51,9 +51,9 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   setupUserDataSubscription(userName: string) {
     this.userDataSubscription = this.user$.subscribe(userData => {
       if (userData === null) {
-        this.store.dispatch(new LoadUserQueryInput({userQueryInputData: userName}));
+        this.store.dispatch(new LoadUserQueryInput({ userQueryInputData: userName }));
       } else if (userData) {
-        this.store.dispatch(new LoadSelectedUser({selectedUserData: userData}));
+        this.store.dispatch(new LoadSelectedUser({ selectedUserData: userData }));
       }
     });
   }

@@ -22,13 +22,13 @@ describe('UserSearchComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserSearchComponent ],
-      imports: [ FormsModule, ReactiveFormsModule, NgbAlertModule ],
+      declarations: [UserSearchComponent],
+      imports: [FormsModule, ReactiveFormsModule, NgbAlertModule],
       providers: [
         provideMockStore(),
       ]
     })
-    .compileComponents();
+      .compileComponents();
 
     mockStore = TestBed.inject(MockStore);
     spyOn(mockStore, 'dispatch');
@@ -50,7 +50,7 @@ describe('UserSearchComponent', () => {
     });
     expect(component.queryResults$).toBeDefined();
     expect(component.queryError$).toBeDefined();
-    expect(mockStore.dispatch).toHaveBeenCalledWith(new LoadUserQueryResults({userQueryResultsData: null}));
+    expect(mockStore.dispatch).toHaveBeenCalledWith(new LoadUserQueryResults({ userQueryResultsData: null }));
   });
 
   it('should receive query results and errors', () => {
@@ -65,7 +65,7 @@ describe('UserSearchComponent', () => {
   it('should clear the query results, then execute a new query', () => {
     component.onSubmit('test');
 
-    expect(mockStore.dispatch).toHaveBeenCalledWith(new LoadUserQueryResults({userQueryResultsData: null}));
-    expect(mockStore.dispatch).toHaveBeenCalledWith(new LoadUserQueryInput({userQueryInputData: 'test'}));
+    expect(mockStore.dispatch).toHaveBeenCalledWith(new LoadUserQueryResults({ userQueryResultsData: null }));
+    expect(mockStore.dispatch).toHaveBeenCalledWith(new LoadUserQueryInput({ userQueryInputData: 'test' }));
   });
 });

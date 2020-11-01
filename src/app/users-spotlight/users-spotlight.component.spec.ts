@@ -10,10 +10,10 @@ describe('UsersSpotlightComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ UsersSpotlightComponent ],
-      imports: [ FontAwesomeModule, AppRoutingModule ]
+      declarations: [UsersSpotlightComponent],
+      imports: [FontAwesomeModule, AppRoutingModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

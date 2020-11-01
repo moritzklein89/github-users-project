@@ -16,7 +16,7 @@ export class UserQueryInputAction implements Action {
 export class LoadUserQueryInput implements Action {
   readonly type = UserQueryInputActionTypes.LoadUserQueryInput;
 
-  constructor(readonly payload: {userQueryInputData: string}) {
+  constructor(readonly payload: { userQueryInputData: string }) {
 
   }
 }
@@ -24,7 +24,7 @@ export class LoadUserQueryInput implements Action {
 export class UserQueryInputError implements Action {
   readonly type = UserQueryInputActionTypes.UserQueryInputError;
 
-  constructor(readonly payload: {error: string}) {
+  constructor(readonly payload: { error: string }) {
 
   }
 }

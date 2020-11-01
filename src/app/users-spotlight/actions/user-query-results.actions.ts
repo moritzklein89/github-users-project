@@ -15,7 +15,7 @@ export class UserQueryResultsAction implements Action {
 export class LoadUserQueryResults implements Action {
   readonly type = UserQueryResultsActionTypes.LoadUserQueryResults;
 
-  constructor(readonly payload: {userQueryResultsData: UserQueryResults}) {
+  constructor(readonly payload: { userQueryResultsData: UserQueryResults }) {
 
   }
 }

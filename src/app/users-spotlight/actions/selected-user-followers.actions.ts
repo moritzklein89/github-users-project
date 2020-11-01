@@ -15,7 +15,7 @@ export class SelectedUserFollowersAction implements Action {
 export class LoadSelectedUserFollowers implements Action {
   readonly type = SelectedUserFollowersActionTypes.LoadSelectedUserFollowers;
 
-  constructor(readonly payload: {selectedUserFollowersData: FullUser[]}) {
+  constructor(readonly payload: { selectedUserFollowersData: FullUser[] }) {
 
   }
 }

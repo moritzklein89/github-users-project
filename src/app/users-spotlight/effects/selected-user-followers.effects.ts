@@ -13,16 +13,16 @@ export class SelectedUserFollowersEffects {
 
   @Effect()
   loadSelectedUser$ = this.actions$
-  .pipe(
-    ofType<LoadSelectedUser>(SelectedUserActionTypes.LoadSelectedUser),
-    mergeMap((action) => this.userQueryService.getFollowersWithFollowers(action.payload.selectedUserData.followers_url)
     .pipe(
-      map(followersWithFollowers => {
-        return (new LoadSelectedUserFollowers({selectedUserFollowersData: followersWithFollowers}));
-      }),
-      catchError((errorMessage) => of(new SelectedUserError({error: errorMessage})))
-    ))
-  );
+      ofType<LoadSelectedUser>(SelectedUserActionTypes.LoadSelectedUser),
+      mergeMap((action) => this.userQueryService.getFollowersWithFollowers(action.payload.selectedUserData.followers_url)
+        .pipe(
+          map(followersWithFollowers => {
+            return (new LoadSelectedUserFollowers({ selectedUserFollowersData: followersWithFollowers }));
+          }),
+          catchError((errorMessage) => of(new SelectedUserError({ error: errorMessage })))
+        ))
+    );
 
   constructor(private actions$: Actions, private store: Store<UsersSpotlightState>, private userQueryService: UserQueryService) { }
 

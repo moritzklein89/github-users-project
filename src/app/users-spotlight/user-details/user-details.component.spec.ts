@@ -21,13 +21,13 @@ describe('UserDetailsComponent', () => {
   let mockFollowersDataSelector: MemoizedSelector<UsersSpotlightState, FullUser[]>;
   let mockFollowersErrorSelector: MemoizedSelector<UsersSpotlightState, string>;
 
-  const mockQueryParamsObservable = of([{username: 'example'}]);
+  const mockQueryParamsObservable = of([{ username: 'example' }]);
   const exampleError = 'test-error';
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserDetailsComponent ],
-      imports: [ NgxChartsModule],
+      declarations: [UserDetailsComponent],
+      imports: [NgxChartsModule],
       providers: [
         {
           provide: ActivatedRoute,
@@ -38,7 +38,7 @@ describe('UserDetailsComponent', () => {
         provideMockStore()
       ]
     })
-    .compileComponents();
+      .compileComponents();
 
     mockStore = TestBed.inject(MockStore);
     spyOn(mockStore, 'dispatch');
@@ -75,10 +75,10 @@ describe('UserDetailsComponent', () => {
         xAxisLabel: '',
         showYAxisLabel: false,
         yAxisLabel: '',
-        colorScheme: {domain: ['#007bff']},
+        colorScheme: { domain: ['#007bff'] },
         view: null
       });
-      expect(mockStore.dispatch).toHaveBeenCalledWith(new LoadSelectedUserFollowers({selectedUserFollowersData: null}));
+      expect(mockStore.dispatch).toHaveBeenCalledWith(new LoadSelectedUserFollowers({ selectedUserFollowersData: null }));
       expect(component.user$).toBeDefined();
       expect(component.followers$).toBeDefined();
       expect(component.followersError$).toBeDefined();
@@ -99,7 +99,7 @@ describe('UserDetailsComponent', () => {
       component.user$ = mockStore.pipe(select(selectUser, 'example'));
       component.setupUserDataSubscription('example');
 
-      expect(mockStore.dispatch).toHaveBeenCalledWith(new LoadUserQueryInput({userQueryInputData: 'example'}));
+      expect(mockStore.dispatch).toHaveBeenCalledWith(new LoadUserQueryInput({ userQueryInputData: 'example' }));
     });
 
     it('should select a user if it has the associated data', () => {
@@ -107,7 +107,7 @@ describe('UserDetailsComponent', () => {
       component.user$ = mockStore.pipe(select(selectUser, 'example'));
       component.setupUserDataSubscription('example');
 
-      expect(mockStore.dispatch).toHaveBeenCalledWith(new LoadSelectedUser({selectedUserData: exampleUser}));
+      expect(mockStore.dispatch).toHaveBeenCalledWith(new LoadSelectedUser({ selectedUserData: exampleUser }));
     });
 
     it('should listen for followersData, process and then inject it into the barChart', () => {

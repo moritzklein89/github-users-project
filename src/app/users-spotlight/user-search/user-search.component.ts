@@ -26,12 +26,12 @@ export class UserSearchComponent implements OnInit {
     });
     this.queryResults$ = this.store.pipe(select(selectUserQueryResults));
     this.queryError$ = this.store.pipe(select(selectQueryError));
-    this.store.dispatch(new LoadUserQueryResults({userQueryResultsData: null}));
+    this.store.dispatch(new LoadUserQueryResults({ userQueryResultsData: null }));
   }
 
   onSubmit(userName: string) {
-    this.store.dispatch(new LoadUserQueryResults({userQueryResultsData: null}));
-    this.store.dispatch(new LoadUserQueryInput({userQueryInputData: userName}));
+    this.store.dispatch(new LoadUserQueryResults({ userQueryResultsData: null }));
+    this.store.dispatch(new LoadUserQueryInput({ userQueryInputData: userName }));
   }
 
 }
