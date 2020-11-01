@@ -4,23 +4,23 @@ import { forkJoin, Observable } from 'rxjs';
 import { UserQueryResults } from '../models/user/user-query-results';
 import { FullUser, User } from '../models/user/user';
 import { mergeMap } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserQueryService {
-  private githubApiSearchUrl = 'https://api.github.com/search/users';
-  private githubApiUsersUrl = 'https://api.github.com/users/';
+  private githubApiUrl = environment.githubApiUrl;
   private followersWithFollowersLimit = 10;
 
   constructor(private http: HttpClient) { }
 
   getUsers(queryInput: string): Observable<UserQueryResults> {
-    return this.http.get<UserQueryResults>(this.githubApiSearchUrl + '?q=' + queryInput);
+    return this.http.get<UserQueryResults>(`${this.githubApiUrl}/search/users?q=${queryInput}`);
   }
 
   getFullUser(userName: string): Observable<FullUser> {
-    return this.http.get<FullUser>(this.githubApiUsersUrl + userName);
+    return this.http.get<FullUser>(`${this.githubApiUrl}/users/${userName}`);
   }
 
   getFollowers(followersUrl: string): Observable<User[]> {
